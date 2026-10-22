@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Karkhanis Labs Product Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <!-- Polished Theme Stylesheet -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <!-- Collapsible sidebar (must load after the theme) -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@1.3.5/dist/sidebar.min.css">
+  <style>
+    /* Karkhanis Labs brand accent — deep teal. The Vue theme routes every
+       accent through var(--theme-color), so this one token re-skins it. */
+    :root {
+      --theme-color: #0D9488;
+      --brand-accent-dark: #0F766E;
+      --brand-accent-tint: #F0FDFA;
+      --brand-accent-border: #99F6E4;
+    }
+
+    /* The collapse plugin's carets are hardcoded grey and theme-unaware. */
+    .sidebar-nav ul:not(.app-sub-sidebar) > li:not(.file)::before {
+      border-right-color: var(--theme-color);
+      border-bottom-color: var(--theme-color);
+      opacity: .45;
+      transition: transform .1s ease, opacity .2s ease;
+    }
+    .sidebar-nav ul:not(.app-sub-sidebar) > li.open::before,
+    .sidebar-nav ul:not(.app-sub-sidebar) > li:hover::before {
+      opacity: 1;
+    }
+
+    /* The plugin draws a caret on every li; suppress it on leaf page links. */
+    .sidebar-nav li:not(:has(> ul))::before { display: none !important; }
+
+    /* Level 1 — product name (Traxettle, and future products). */
+    .sidebar-nav > ul > li > strong {
+      display: block;
+      margin: 1.5em 0 .5em;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      color: #2c3e50;
+    }
+    .sidebar-nav > ul > li.open > strong { color: var(--brand-accent-dark); }
+
+    /* Level 2 — section within a product (Product, Architecture, …). */
+    .sidebar-nav > ul > li > ul > li > strong {
+      display: block;
+      margin: .9em 0 .3em;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #7f8c8d;
+    }
+    .sidebar-nav > ul > li > ul > li.open > strong { color: var(--brand-accent-dark); }
+
+    .sidebar-nav li.active > a {
+      font-weight: 600;
+      border-right: 2px solid var(--theme-color);
+    }
+
+    /* Blockquotes read as tinted callout panels — the KB leans on them heavily. */
+    blockquote {
+      background: var(--brand-accent-tint);
+      border-left-color: var(--theme-color);
+      border-radius: 0 6px 6px 0;
+      color: #4a5568;
+      padding: 14px 18px;
+    }
+
+    .markdown-section code { color: var(--brand-accent-dark); }
+    .markdown-section th { background: var(--brand-accent-tint); }
+    .markdown-section table tr:hover { background: #fafdfc; }
+    .app-name-link { font-weight: 600; letter-spacing: -.01em; }
+  </style>
+</head>
+<body>
+  <div id="app">Loading documentation...</div>
+  <script>
+    window.$docsify = {
+      name: 'Product Hub (by Karkhanis labs)',
+      repo: 'vkarkhanis/knowledgebases', // renders the top-right GitHub ribbon
+      loadSidebar: true,
+      subMaxLevel: 2,
+      auto2top: true,
+      // Resolve in-document links against the current folder, so the relative
+      // links inside Traxettle/INDEX.md and Traxettle/README.md work.
+      // Sidebar links are root-absolute (leading /) to stay correct under this.
+      relativePath: true,
+      // Always serve the root sidebar, whatever folder is being viewed
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      },
+      // Collapse every sidebar group by default; expand the active one
+      sidebarDisplayLevel: 1,
+      // Built-in Search plugin configuration
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Search documentation...',
+        noData: 'No results found!',
+        depth: 6
+      }
+    }
+  </script>
+  <!-- Docsify v4 core and plugins -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse@1.3.5/dist/docsify-sidebar-collapse.min.js"></script>
+</body>
+</html>
